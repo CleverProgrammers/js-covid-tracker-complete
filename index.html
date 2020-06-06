@@ -6,6 +6,10 @@
     <title>COVID Tracker</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="map-style.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
@@ -48,6 +52,9 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="chart-data">
+        <canvas id="myChart"></canvas>
       </div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNy8AIU0KV6iAHPwjPyaLkx9UdFvWoGj8&callback=initMap"

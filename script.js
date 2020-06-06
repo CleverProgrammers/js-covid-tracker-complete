@@ -2,6 +2,7 @@
 
 window.onload = () => {
     getCountryData();
+    getHistoricalData();
 }
 
 
@@ -9,8 +10,9 @@ var map;
 var infoWindow;
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 4
+        center: {lat: 39.8283, lng: -98.5795},
+        zoom: 3,
+        styles: mapStyle
     });
     infoWindow = new google.maps.InfoWindow();
 }
@@ -24,6 +26,80 @@ const getCountryData = () => {
         showDataInTable(data);
     })
 }
+
+const getHistoricalData = () => {
+    fetch("https://corona.lmao.ninja/v2/historical/all?lastdays=120")
+    .then((response)=>{
+        return response.json()
+    }).then((data)=>{
+        let chartData = buildChartData(data);
+        buildChart(chartData);
+    })
+}
+
+const buildChartData = (data) => {
+    let chartData = [];
+    for(let date in data.cases){
+        let newDataPoint = {
+            x: date,
+            y: data.cases[date]
+        }
+        chartData.push(newDataPoint);
+    }
+    return chartData;
+}
+
+
+const buildChart = (chartData) => {
+    console.log("All if good");
+    var timeFormat = 'MM/DD/YY';
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            datasets: [{
+                label: 'Total Cases',
+                backgroundColor: '#1d2c4d',
+                borderColor: '#1d2c4d',
+                data: chartData
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            scales:     {
+                xAxes: [{
+                    type: "time",
+                    time: {
+                        format: timeFormat,
+                        tooltipFormat: 'll'
+                    },
+                    scaleLabel: {
+                        display:     true,
+                        labelString: 'Date'
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return numeral(value).format('0,0');
+                        }
+                    }
+                }]
+            }
+        }
+    });
+}
+
+
 
 
 const openInfoWindow = () => {
