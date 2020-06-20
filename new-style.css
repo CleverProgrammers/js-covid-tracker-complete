@@ -1,0 +1,52 @@
+
+.main {
+    height: 100vh;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.map-container {
+    height: 500px;
+}
+
+#map {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.chart-container {
+    height: 300px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.chart-container .col {
+    background-color: #EFF2F6;
+    border-radius: 12px;
+}
+
+.linear-chart {
+    height: 100%;
+}
+
+.title-container h1 {
+    color: #fc3c3c;
+    margin-bottom: 0;
+}
+
+.title-container h4 {
+    text-transform: uppercase;
+    color: #CACBCF;
+}
+
+.stats-container .card {    
+    background-color: #EFF2F6;
+    border-radius: 12px;
+}
+
+.stats-container .card-body {
+    padding: 1rem;
+}

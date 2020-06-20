@@ -6,21 +6,93 @@
     <title>COVID Tracker</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="new-style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
     <script src="map-style.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
-    <div id="nav">
+  <div class="container-fluid main">
+    <div class="row">
+      <div class="col-8">
+        <div class="row header-container">
+          <div class="col title-container">
+            <h1>Covid-19</h1>
+            <h4>Coronavirus</h4>
+          </div>
+          <div class="col search-container">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Location" aria-label="Search Location" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+        <div class="row stats-container">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Total Cases</h5>
+                <h6 class="card-subtitle mb-2 text-muted">1,436,886</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Active Cases</h5>
+                <h6 class="card-subtitle mb-2 text-muted">1,049,886</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Recovered</h5>
+                <h6 class="card-subtitle mb-2 text-muted">302,964</h6>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Deaths</h5>
+                <h6 class="card-subtitle mb-2 text-muted">82,191</h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row map-container mt-3">
+          <div class="col">
+            <div id="map"></div>
+          </div>
+        </div>
+        <div class="row chart-container mt-3">
+          <div class="col linear-chart mr-3">
+            <canvas id="myChart"></canvas>
+          </div>
+          <div class="col ">
 
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+
+      </div>
     </div>
-    <div class="map-info">
+  </div>
+    <!-- <div id="nav">
+
+    </div> -->
+    <!-- <div class="map-info">
         <div id="map"></div>
 
-    </div>
-    <div class="data-info">
+    </div> -->
+    <!-- <div class="data-info">
       <div class="country-data">
         <table class="table table-striped table-dark">
           <thead>
@@ -52,11 +124,11 @@
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class="chart-data">
+      </div> -->
+      <!-- <div class="chart-data">
         <canvas id="myChart"></canvas>
       </div>
-    </div>
+    </div> -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ7VvobsIYLr3Pe6cTNUnIUvzgpV2Na-o&callback=initMap"
     async defer></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

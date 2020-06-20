@@ -70,6 +70,7 @@ const buildChart = (chartData) => {
 
         // Configuration options go here
         options: {
+            maintainAspectRatio: false,
             tooltips: {
                 mode: 'index',
                 intersect: false
@@ -80,10 +81,6 @@ const buildChart = (chartData) => {
                     time: {
                         format: timeFormat,
                         tooltipFormat: 'll'
-                    },
-                    scaleLabel: {
-                        display:     true,
-                        labelString: 'Date'
                     }
                 }],
                 yAxes: [{
