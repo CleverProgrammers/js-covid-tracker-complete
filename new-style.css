@@ -50,3 +50,25 @@
 .stats-container .card-body {
     padding: 1rem;
 }
+
+.side-panel-container {
+    background-color: #EFF2F6;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+}
+
+.total-number {
+    color: #1d2c4d;
+}
+
+.active-number {
+    color: #9d80fe;
+}
+
+.recovered-number {
+    color: #7dd71d;
+}
+
+.deaths-number {
+    color: #fb4443;
+}

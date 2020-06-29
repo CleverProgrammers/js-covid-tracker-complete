@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
     <script src="map-style.js"></script>
     <script src="script.js"></script>
+    <script src="charts.js"></script>
 </head>
 <body>
   <div class="container-fluid main">
@@ -34,34 +35,34 @@
         </div>
         <div class="row stats-container">
           <div class="col">
-            <div class="card">
+            <div class="card" onclick="changeDataSelection('cases')">
               <div class="card-body">
                 <h5 class="card-title">Total Cases</h5>
-                <h6 class="card-subtitle mb-2 text-muted">1,436,886</h6>
+                <h6 class="card-subtitle mb-2 total-number">1,436,886</h6>
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card active-cases-card" onclick="changeDataSelection('active')">
               <div class="card-body">
                 <h5 class="card-title">Active Cases</h5>
-                <h6 class="card-subtitle mb-2 text-muted">1,049,886</h6>
+                <h6 class="card-subtitle mb-2 active-number">1,049,886</h6>
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card" onclick="changeDataSelection('recovered')">
               <div class="card-body">
                 <h5 class="card-title">Recovered</h5>
-                <h6 class="card-subtitle mb-2 text-muted">302,964</h6>
+                <h6 class="card-subtitle mb-2 recovered-number">302,964</h6>
               </div>
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card" onclick="changeDataSelection('deaths')">
               <div class="card-body">
                 <h5 class="card-title">Deaths</h5>
-                <h6 class="card-subtitle mb-2 text-muted">82,191</h6>
+                <h6 class="card-subtitle mb-2 deaths-number">82,191</h6>
               </div>
             </div>
           </div>
@@ -72,15 +73,15 @@
           </div>
         </div>
         <div class="row chart-container mt-3">
-          <div class="col linear-chart mr-3">
+          <div class="col linear-chart p-3 mr-3">
             <canvas id="myChart"></canvas>
           </div>
-          <div class="col ">
-
+          <div class="col p-3">
+            <canvas id="myPieChart"></canvas>
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-4 side-panel-container my-3">
 
       </div>
     </div>
