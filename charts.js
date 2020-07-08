@@ -11,7 +11,6 @@ const buildChartData = (data) => {
 }
 
 const buildChart = (chartData) => {
-    console.log("All if good");
     var timeFormat = 'MM/DD/YY';
     var ctx = document.getElementById('myChart').getContext('2d');
     var chart = new Chart(ctx, {
@@ -22,8 +21,8 @@ const buildChart = (chartData) => {
         data: {
             datasets: [{
                 label: 'Total Cases',
-                backgroundColor: '#1d2c4d',
-                borderColor: '#1d2c4d',
+                backgroundColor: 'rgba(204, 16, 52, 0.5)',
+                borderColor: '#CC1034',
                 data: chartData
             }]
         },
@@ -44,10 +43,13 @@ const buildChart = (chartData) => {
                     }
                 }],
                 yAxes: [{
+                    gridLines: {
+                        display:false
+                    },
                     ticks: {
                         // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
-                            return numeral(value).format('0,0');
+                            return numeral(value).format('0a');
                         }
                     }
                 }]

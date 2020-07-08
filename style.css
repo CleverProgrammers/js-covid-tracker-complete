@@ -29,10 +29,9 @@ body {
 }
 
 .country-data {
-    width: 40%;
     margin-top: 20px;
-    border-radius: 10px;
-    overflow: hidden;
+    overflow: scroll;
+    height: 400px;
 }
 
 .info-flag img {
