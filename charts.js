@@ -20,7 +20,6 @@ const buildChart = (chartData) => {
         // The data for our dataset
         data: {
             datasets: [{
-                label: 'Total Cases',
                 backgroundColor: 'rgba(204, 16, 52, 0.5)',
                 borderColor: '#CC1034',
                 data: chartData
@@ -29,6 +28,9 @@ const buildChart = (chartData) => {
 
         // Configuration options go here
         options: {
+            legend: {
+                display: false
+            },
             maintainAspectRatio: false,
             tooltips: {
                 mode: 'index',

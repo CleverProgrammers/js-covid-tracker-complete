@@ -12,7 +12,7 @@ var infoWindow;
 let coronaGlobalData;
 let mapCircles = [];
 var casesTypeColors = {
-    cases: '#1d2c4d',
+    cases: '#CC1034',
     active: '#9d80fe',
     recovered: '#7dd71d',
     deaths: '#fb4443'
@@ -105,7 +105,7 @@ const showDataOnMap = (data, casesType="cases") => {
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillColor: casesTypeColors[casesType],
-            fillOpacity: 0.35,
+            fillOpacity: 0.40,
             map: map,
             center: countryCenter,
             radius: country[casesType]
@@ -154,7 +154,7 @@ const showDataInTable = (data) => {
         html += `
         <tr>
             <td>${country.country}</td>
-            <td>${numeral(country.cases).format('0,0')}</td>
+            <td class="table-cases-number" >${numeral(country.cases).format('0,0')}</td>
         </tr>
         `
     })
