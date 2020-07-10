@@ -44,8 +44,21 @@ const getCountryData = () => {
     }).then((data)=>{
         coronaGlobalData = data;
         showDataOnMap(data);
-        showDataInTable(data);
+        let sortedData = sortData(data);
+        showDataInTable(sortedData);
     })
+}
+
+const sortData = (data) => {
+    let sortedData  = [...data]
+    sortedData.sort((a, b)=>{
+        if(a.cases > b.cases){
+            return -1;
+        } else {
+            return 1
+        }
+    })
+    return sortedData
 }
 
 const getWorldCoronaData = () => {
