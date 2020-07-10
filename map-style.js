@@ -3,7 +3,7 @@ var mapStyle = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#f5f5f5"
+        "color": "#B2A4A4"
       }
     ]
   },
@@ -152,7 +152,7 @@ var mapStyle = [
     "elementType": "geometry",
     "stylers": [
       {
-        "color": "#c9c9c9"
+        "color": "#F3F2F8"
       }
     ]
   },

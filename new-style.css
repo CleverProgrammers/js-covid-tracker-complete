@@ -13,7 +13,24 @@ body {
 }
 
 .map-container {
-    height: 500px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,.05);
+    box-shadow: 0 0 8px -5px rgba(0,0,0, 0.5)
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: #6A5D5D;
+}
+
+.map-header h4 {
+    font-weight: 400;
+    margin-bottom: 0;
 }
 
 .header-container {
@@ -83,6 +100,7 @@ body {
 
 .table-cases-number {
     text-align: right;
+    font-weight: 500;
 }
 
 .total-number {
@@ -102,7 +120,15 @@ body {
     font-weight: 400;
 }
 
+.country-data .table {
+    color: #6A5D5D;
+}
+
 .country-data .table td {
     padding: 0.5rem;
     border: none;
+}
+
+.country-data .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #F3F2F8;
 }

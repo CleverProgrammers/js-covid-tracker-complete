@@ -4,6 +4,7 @@ window.onload = () => {
     getCountryData();
     getHistoricalData();
     getWorldCoronaData();
+    $('.ui.dropdown').dropdown();
 }
 
 
@@ -21,7 +22,10 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 39.8283, lng: -98.5795},
         zoom: 3,
-        styles: mapStyle
+        styles: mapStyle,
+        mapTypeControl: false,
+        fullscreenControl: false, 
+        streetViewControl: false
     });
     infoWindow = new google.maps.InfoWindow();
 }
