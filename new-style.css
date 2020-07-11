@@ -68,6 +68,8 @@ body {
 }
 
 .stats-container .card {    
+    overflow: hidden;
+    cursor: pointer;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 0 8px -4px rgba(0,0,0, 0.5);
@@ -132,3 +134,29 @@ body {
 .country-data .table-striped tbody tr:nth-of-type(odd) {
     background-color: #F3F2F8;
 }
+
+.tab-selection {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    opacity: 0;
+}
+
+.tab-selection.selected {
+    opacity: 1;
+}
+
+.cases .tab-selection {
+    background-color: #CC1034;
+}
+
+.recovered .tab-selection {
+    background-color: #7fd922;
+}
+
+.deaths .tab-selection {
+    background-color: #FA5575;
+}
+
