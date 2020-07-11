@@ -11,6 +11,7 @@ window.onload = () => {
     getCountriesData();
     getHistoricalData();
     getWorldCoronaData();
+    setHoverState();
 }
 
 
@@ -59,7 +60,14 @@ const changeDataSelection = (casesType) => {
     setSelectedTab(casesType);
     clearTheMap();
     showDataOnMap(coronaGlobalData, casesType);
-    
+}
+
+const setHoverState = () => {
+    $('.card').hover(function() {
+        $(this).find('.tab-selection').not('.selected').hide().fadeIn(200);
+    }, function(){
+        $(this).find('.tab-selection').not('.selected').fadeOut(200);
+    })
 }
 
 const clearTheMap = () => {
