@@ -58,8 +58,14 @@ const changeCountrySelection = (countryCode) => {
 
 const changeDataSelection = (casesType) => {
     setSelectedTab(casesType);
+    changeMapTitle(casesType);
     clearTheMap();
     showDataOnMap(coronaGlobalData, casesType);
+}
+
+const changeMapTitle = (casesType) => {
+    let casesText = casesType.charAt(0).toUpperCase() + casesType.slice(1)
+    document.querySelector('.map-header h4').textContent = `Coronavirus ${casesText}`;
 }
 
 const setHoverState = () => {
@@ -207,13 +213,13 @@ const showDataOnMap = (data, casesType="cases") => {
                     ${country.country}
                 </div>
                 <div class="info-confirmed">
-                    Total: ${country.cases}
+                    Total: ${numeral(country.cases).format('0,0')}
                 </div>
                 <div class="info-recovered">
-                    Recovered: ${country.recovered}
+                    Recovered: ${numeral(country.recovered).format('0,0')}
                 </div>
                 <div class="info-deaths">   
-                    Deaths: ${country.deaths}
+                    Deaths: ${numeral(country.deaths).format('0,0')}
                 </div>
             </div>
         `

@@ -34,7 +34,12 @@ const buildChart = (chartData) => {
             maintainAspectRatio: false,
             tooltips: {
                 mode: 'index',
-                intersect: false
+                intersect: false,
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return numeral(tooltipItem.value).format('0,0');
+                    }
+                }
             },
             scales:     {
                 xAxes: [{
