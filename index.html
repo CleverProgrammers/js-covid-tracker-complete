@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="new-style.css">
+    <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
@@ -18,14 +19,14 @@
     <script src="charts.js"></script>
 </head>
 <body>
-  <div class="container-fluid main">
-    <div class="row">
-      <div class="col-8">
+  <div class="container-fluid">
+    <div class="row my-4 main">
+      <div class="col-12 col-lg-8 d-flex flex-column">
         <div class="row header-container">
-          <div class="col title-container">
+          <div class="col-12 col-sm-6 title-container">
             <h2>COVID-19 Tracker</h2>
           </div>
-          <div class="col search-container">
+          <div class="col-12 col-sm-6 mt-3 mt-sm-0 search-container">
             <div class="ui fluid search selection dropdown">
               <input type="hidden" name="country">
               <i class="dropdown icon"></i>
@@ -33,16 +34,10 @@
                 <div class="menu">
                 </div>
              </div>
-            <!-- <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-              </div>
-              <input type="text" class="form-control" placeholder="Search Location" aria-label="Search Location" aria-describedby="basic-addon1">
-            </div> -->
           </div>
         </div>
-        <div class="row stats-container">
-          <div class="col cases">
+        <div class="row stats-container justify-content-center">
+          <div class="col-12 col-sm-4 cases mt-4">
             <div class="card" onclick="changeDataSelection('cases')">
               <div class="tab-selection selected"></div>
               <div class="card-body">
@@ -52,7 +47,7 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col-12 col-sm-4 mt-4">
             <div class="card recovered" onclick="changeDataSelection('recovered')">
               <div class="tab-selection"></div>
               <div class="card-body">
@@ -62,7 +57,7 @@
               </div>
             </div>
           </div>
-          <div class="col">
+          <div class="col-12 col-sm-4 mt-4">
             <div class="card deaths" onclick="changeDataSelection('deaths')">
               <div class="tab-selection"></div>
               <div class="card-body">
@@ -73,33 +68,35 @@
             </div>
           </div>
         </div>
-        <div class="row mt-3">
-          <div class="col">
-            <div class="map-container">
+        <div class="row mt-4 flex-grow-1 flex-column">
+          <div class="col d-flex flex-column flex-grow-1">
+            <div class="map-container d-flex flex-column flex-grow-1">
               <div class="map-header">
                 <h4>Coronavirus Cases</h4>
                 <span class="text-muted">Last Updated April 09, 2020</span>
               </div>
-              <div id="map"></div>
+              <div id="map" class="flex-grow-1"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-4 side-panel-container my-3">
-        <div class="cases-table-container">
-          <h4>Live Cases by Country</h4>
-          <div class="country-data">
-            <table class="table table-striped">
-              <tbody id="table-data">
+      <div class="col-12 col-lg-4 mt-4 mt-lg-0 d-flex pr-lg-0 flex-column">
+        <div class="flex-grow-1 side-panel-container p-4 d-flex flex-column">
+          <div class="cases-table-container">
+            <h4>Live Cases by Country</h4>
+            <div class="country-data">
+              <table class="table table-striped">
+                <tbody id="table-data">
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-        <div class="chart-container mt-3">
-          <h4>Total Cases Globally</h4>
-          <div class="linear-chart p-3">
-            <canvas id="myChart"></canvas>
+          <div class="chart-container mt-3 flex-grow-1">
+            <h4>Total Cases Globally</h4>
+            <div class="linear-chart pt-3">
+              <canvas id="myChart"></canvas>
+            </div>
           </div>
         </div>
       </div>

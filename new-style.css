@@ -2,9 +2,9 @@ body {
     background-color: #F5F6FA;
 }
 
-
 .main {
-    height: 100vh;
+    min-height: 900px;
+    max-width: 1370px;
 }
 
 .search-container {
@@ -31,11 +31,6 @@ body {
 .map-header h4 {
     font-weight: 400;
     margin-bottom: 0;
-}
-
-.header-container {
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 
 #map {
@@ -145,7 +140,7 @@ body {
 }
 
 .tab-selection.selected {
-    display: block;
+    display: block !important;
 }
 
 .cases .tab-selection {

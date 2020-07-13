@@ -1,0 +1,12 @@
+@media (max-width: 992px) {
+    .side-panel-container {
+        border-radius: 30px;
+    }
+}
+
+@media (min-width: 1370px) {
+    .side-panel-container {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+}

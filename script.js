@@ -64,7 +64,7 @@ const changeDataSelection = (casesType) => {
 
 const setHoverState = () => {
     $('.card').hover(function() {
-        $(this).find('.tab-selection').not('.selected').hide().fadeIn(200);
+        $(this).find('.tab-selection').not('.selected').fadeIn(200);
     }, function(){
         $(this).find('.tab-selection').not('.selected').fadeOut(200);
     })
@@ -80,6 +80,7 @@ const setSelectedTab = (casesType) => {
     const tabs = document.querySelectorAll('.tab-selection');
     for(let tab of tabs){
         tab.classList.remove('selected');
+        tab.style.display = 'none';
     }
     const activeTab = document.querySelector(`.${casesType} .tab-selection`);
     activeTab.classList.add('selected');
