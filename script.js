@@ -76,6 +76,11 @@ const setHoverState = () => {
     })
 }
 
+const  updateDate = (dateTimestamp) => {
+    let date = moment(dateTimestamp).format("[Last Updated] MMMM DD, YYYY");
+    document.querySelector('.map-header .date').textContent = date;
+}
+
 const clearTheMap = () => {
     for(let circle of mapCircles){
         circle.setMap(null);
@@ -140,6 +145,7 @@ const getCountryCoronaData = (countryCode) => {
     .then((response)=>{
         return response.json();
     }).then((data)=>{
+        updateDate(data.updated);
         setStatsData(data);
         setMapCountryCenter(data.countryInfo.lat, data.countryInfo.long, 3);
     })
@@ -150,6 +156,7 @@ const getWorldCoronaData = () => {
     .then((response)=>{
         return response.json()
     }).then((data)=>{
+        updateDate(data.updated);
         setStatsData(data);
         setMapCountryCenter(mapCenter.lat, mapCenter.lng, 2);
     })
