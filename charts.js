@@ -1,11 +1,15 @@
 const buildChartData = (data) => {
     let chartData = [];
+    let lastDataPoint;
     for(let date in data.cases){
-        let newDataPoint = {
-            x: date,
-            y: data.cases[date]
+        if(lastDataPoint){
+            let newDataPoint = {
+                x: date,
+                y: data.cases[date] - lastDataPoint
+            }
+            chartData.push(newDataPoint);
         }
-        chartData.push(newDataPoint);
+        lastDataPoint = data.cases[date];
     }
     return chartData;
 }
@@ -31,13 +35,18 @@ const buildChart = (chartData) => {
             legend: {
                 display: false
             },
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
             maintainAspectRatio: false,
             tooltips: {
                 mode: 'index',
                 intersect: false,
                 callbacks: {
                     label: function(tooltipItem, data) {
-                        return numeral(tooltipItem.value).format('0,0');
+                        return numeral(tooltipItem.value).format('+0,0');
                     }
                 }
             },
@@ -61,38 +70,6 @@ const buildChart = (chartData) => {
                     }
                 }]
             }
-        }
-    });
-}
-
-const buildPieChart = (data) => {
-    var ctx = document.getElementById('myPieChart').getContext('2d');
-    var myPieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            datasets: [{
-                data: [
-                    data.active, 
-                    data.recovered, 
-                    data.deaths
-                ],
-                backgroundColor: [
-                    '#9d80fe',
-                    '#7dd71d',
-                    '#fb4443'
-                ]
-            }],
-        
-            // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: [
-                'Active',
-                'Recovered',
-                'Deaths'
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
         }
     });
 }
