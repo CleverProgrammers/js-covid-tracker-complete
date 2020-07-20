@@ -8,6 +8,7 @@ const startUIDropdown = (data) => {
 }
 
 window.onload = () => {
+    initMap();
     getCountriesData();
     getHistoricalData();
     getWorldCoronaData();
@@ -18,6 +19,7 @@ window.onload = () => {
 var map;
 var infoWindow;
 let coronaGlobalData;
+let coronaHystoricalData;
 let mapCircles = [];
 let countrySelection = 'worldwide';
 let mapCenter = {lat: 34.80746, lng: -40.4796}
@@ -27,22 +29,35 @@ let worldwideSelect = {
     selected: true
 }
 var casesTypeColors = {
-    cases: '#CC1034',
-    active: '#9d80fe',
-    recovered: '#7dd71d',
-    deaths: '#fb4443'
+    cases: {
+        hex: '#CC1034',
+        rgb: 'rgb(204, 16, 52)',
+        half_op: 'rgba(204, 16, 52, 0.5)',
+        multiplier: 800
+    },
+    recovered: {
+        hex: '#7dd71d',
+        rgb: 'rgb(125, 215, 29)',
+        half_op: 'rgba(125, 215, 29, 0.5)',
+        multiplier: 1200
+    },
+    deaths: {
+        hex: '#fb4443',
+        rgb: 'rgb(251, 68, 67)',
+        half_op: 'rgba(251, 68, 67, 0.5)',
+        multiplier: 2000
+    }
 }
 
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: mapCenter,
-        zoom: 2,
-        styles: mapStyle,
-        mapTypeControl: false,
-        fullscreenControl: false, 
-        streetViewControl: false
+    map = L.map('map', {
+        center: [mapCenter.lat, mapCenter.lng],
+        zoom: 3
     });
-    infoWindow = new google.maps.InfoWindow();
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map); 
 }
 
 const changeCountrySelection = (countryCode) => {
@@ -61,11 +76,14 @@ const changeDataSelection = (casesType) => {
     changeMapTitle(casesType);
     clearTheMap();
     showDataOnMap(coronaGlobalData, casesType);
+    let chartData = buildChartData(coronaHystoricalData, casesType);
+    updateData(chartData, casesTypeColors[casesType].rgb, casesTypeColors[casesType].half_op);
 }
 
 const changeMapTitle = (casesType) => {
     let casesText = casesType.charAt(0).toUpperCase() + casesType.slice(1)
     document.querySelector('.map-header h4').textContent = `Coronavirus ${casesText}`;
+    document.querySelector('.chart-container .cases-type').textContent = casesText;
 }
 
 const setHoverState = () => {
@@ -83,7 +101,7 @@ const  updateDate = (dateTimestamp) => {
 
 const clearTheMap = () => {
     for(let circle of mapCircles){
-        circle.setMap(null);
+        map.removeLayer(circle);
     }
 }
 
@@ -98,12 +116,12 @@ const setSelectedTab = (casesType) => {
 }
 
 const setMapCountryCenter = (lat, long, zoom) => {
-    map.setZoom(zoom);
-    map.panTo({ lat: lat, lng: long })
+    console.log("setView");
+    map.setView([lat, long], zoom);
 }
 
 const getCountriesData = () => {
-    fetch("https://corona.lmao.ninja/v2/countries")
+    fetch("https://disease.sh/v3/covid-19/countries")
     .then((response)=>{
         return response.json()
     }).then((data)=>{
@@ -147,7 +165,7 @@ const getCountryCoronaData = (countryCode) => {
     }).then((data)=>{
         updateDate(data.updated);
         setStatsData(data);
-        setMapCountryCenter(data.countryInfo.lat, data.countryInfo.long, 3);
+        setMapCountryCenter(data.countryInfo.lat, data.countryInfo.long, 4);
     })
 }
 
@@ -158,7 +176,7 @@ const getWorldCoronaData = () => {
     }).then((data)=>{
         updateDate(data.updated);
         setStatsData(data);
-        setMapCountryCenter(mapCenter.lat, mapCenter.lng, 2);
+        setMapCountryCenter(mapCenter.lat, mapCenter.lng, 3);
     })
 }
 
@@ -178,11 +196,12 @@ const setStatsData = (data) => {
 }
 
 const getHistoricalData = () => {
-    fetch("https://corona.lmao.ninja/v2/historical/all?lastdays=120")
+    fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
     .then((response)=>{
         return response.json()
     }).then((data)=>{
-        let chartData = buildChartData(data);
+        coronaHystoricalData = data;
+        let chartData = buildChartData(data, 'cases');
         buildChart(chartData);
     })
 }
@@ -199,18 +218,12 @@ const showDataOnMap = (data, casesType="cases") => {
             lng: country.countryInfo.long
         }
 
-        var countryCircle = new google.maps.Circle({
-            strokeColor: casesTypeColors[casesType],
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: casesTypeColors[casesType],
-            fillOpacity: 0.40,
-            map: map,
-            center: countryCenter,
-            radius: country[casesType]
-        });
-
-        mapCircles.push(countryCircle);
+        var circle = L.circle([countryCenter.lat, countryCenter.lng], {
+            color: casesTypeColors[casesType].hex,
+            fillColor: casesTypeColors[casesType].hex,
+            fillOpacity: 0.4,
+            radius: Math.sqrt(country[casesType])*casesTypeColors[casesType].multiplier
+        }).addTo(map);
 
         var html = `
             <div class="info-container">
@@ -220,7 +233,7 @@ const showDataOnMap = (data, casesType="cases") => {
                     ${country.country}
                 </div>
                 <div class="info-confirmed">
-                    Total: ${numeral(country.cases).format('0,0')}
+                    Cases: ${numeral(country.cases).format('0,0')}
                 </div>
                 <div class="info-recovered">
                     Recovered: ${numeral(country.recovered).format('0,0')}
@@ -231,18 +244,8 @@ const showDataOnMap = (data, casesType="cases") => {
             </div>
         `
 
-        var infoWindow = new google.maps.InfoWindow({
-            content: html,
-            position: countryCircle.center
-        });
-        google.maps.event.addListener(countryCircle, 'mouseover', function() {
-            infoWindow.open(map);
-        });
-
-        google.maps.event.addListener(countryCircle, 'mouseout', function(){
-            infoWindow.close();
-        })
-
+        circle.bindPopup(html);
+        mapCircles.push(circle);
     })
 
 }

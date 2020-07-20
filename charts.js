@@ -1,23 +1,35 @@
-const buildChartData = (data) => {
+let chart;
+
+const buildChartData = (data, casesType) => {
     let chartData = [];
     let lastDataPoint;
     for(let date in data.cases){
         if(lastDataPoint){
             let newDataPoint = {
                 x: date,
-                y: data.cases[date] - lastDataPoint
+                y: data[casesType][date] - lastDataPoint
             }
             chartData.push(newDataPoint);
         }
-        lastDataPoint = data.cases[date];
+        lastDataPoint = data[casesType][date];
     }
     return chartData;
+}
+
+const updateData = (data, borderColor, backgroundColor) => {
+    chart.data.datasets[0].data = data;
+    chart.data.datasets[0].borderColor = borderColor;
+    chart.data.datasets[0].backgroundColor = backgroundColor;
+    chart.update({
+        duration: 800,
+        easing: 'easeInOutCubic'
+    });
 }
 
 const buildChart = (chartData) => {
     var timeFormat = 'MM/DD/YY';
     var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
+    chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
 
