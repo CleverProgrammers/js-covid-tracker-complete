@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -22,89 +23,91 @@
     <script src="script.js"></script>
 </head>
 <body>
-  <div class="container-fluid">
-    <div class="row my-4 main">
-      <div class="col-12 col-lg-8 d-flex flex-column">
-        <div class="row header-container">
-          <div class="col-12 col-sm-6 title-container">
-            <h2>COVID-19 Tracker</h2>
+  <center>
+    <div class="container-fluid">
+      <div class="row my-4 main">
+        <div class="col-12 col-lg-8 d-flex flex-column">
+          <div class="row header-container">
+            <div class="col-12 col-sm-6 title-container">
+              <h2>COVID-19 Tracker</h2>
+            </div>
+            <div class="col-12 col-sm-6 mt-3 mt-sm-0 search-container">
+              <div class="ui fluid search selection dropdown">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                  <div class="menu">
+                  </div>
+               </div>
+            </div>
           </div>
-          <div class="col-12 col-sm-6 mt-3 mt-sm-0 search-container">
-            <div class="ui fluid search selection dropdown">
-              <input type="hidden" name="country">
-              <i class="dropdown icon"></i>
-              <div class="default text">Select Country</div>
-                <div class="menu">
+          <div class="row stats-container justify-content-center">
+            <div class="col-12 col-sm-4 cases mt-4">
+              <div class="card" onclick="changeDataSelection('cases')">
+                <div class="tab-selection selected"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Coronavirus Cases</h6>
+                  <h3 class="card-subtitle mb-2 total-number">1,436,886</h3>
+                  <div class="text-muted font-weight-bold total cases-total">1.69M Total</div>
                 </div>
-             </div>
-          </div>
-        </div>
-        <div class="row stats-container justify-content-center">
-          <div class="col-12 col-sm-4 cases mt-4">
-            <div class="card" onclick="changeDataSelection('cases')">
-              <div class="tab-selection selected"></div>
-              <div class="card-body">
-                <h6 class="card-title">Coronavirus Cases</h6>
-                <h3 class="card-subtitle mb-2 total-number">1,436,886</h3>
-                <div class="text-muted font-weight-bold total cases-total">1.69M Total</div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 mt-4">
+              <div class="card recovered" onclick="changeDataSelection('recovered')">
+                <div class="tab-selection"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Recovered</h6>
+                  <h3 class="card-subtitle mb-2 recovered-number">302,964</h3>
+                  <div class="text-muted font-weight-bold total recovered-total">1.69M Total</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 mt-4">
+              <div class="card deaths" onclick="changeDataSelection('deaths')">
+                <div class="tab-selection"></div>
+                <div class="card-body">
+                  <h6 class="card-title">Deaths</h6>
+                  <h3 class="card-subtitle mb-2 deaths-number">82,191</h3>
+                  <div class="text-muted font-weight-bold total deaths-total">1.69M Total</div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-12 col-sm-4 mt-4">
-            <div class="card recovered" onclick="changeDataSelection('recovered')">
-              <div class="tab-selection"></div>
-              <div class="card-body">
-                <h6 class="card-title">Recovered</h6>
-                <h3 class="card-subtitle mb-2 recovered-number">302,964</h3>
-                <div class="text-muted font-weight-bold total recovered-total">1.69M Total</div>
+          <div class="row mt-4 flex-grow-1 flex-column" style="flex-basis: 400px;">
+            <div class="col d-flex flex-column flex-grow-1">
+              <div class="map-container d-flex flex-column flex-grow-1">
+                <div class="map-header">
+                  <h4>Coronavirus Cases</h4>
+                  <span class="date text-muted">Last Updated April 09, 2020</span>
+                </div>
+                <div id="map" class="flex-grow-1"></div>
               </div>
-            </div>
-          </div>
-          <div class="col-12 col-sm-4 mt-4">
-            <div class="card deaths" onclick="changeDataSelection('deaths')">
-              <div class="tab-selection"></div>
-              <div class="card-body">
-                <h6 class="card-title">Deaths</h6>
-                <h3 class="card-subtitle mb-2 deaths-number">82,191</h3>
-                <div class="text-muted font-weight-bold total deaths-total">1.69M Total</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-4 flex-grow-1 flex-column" style="flex-basis: 400px;">
-          <div class="col d-flex flex-column flex-grow-1">
-            <div class="map-container d-flex flex-column flex-grow-1">
-              <div class="map-header">
-                <h4>Coronavirus Cases</h4>
-                <span class="date text-muted">Last Updated April 09, 2020</span>
-              </div>
-              <div id="map" class="flex-grow-1"></div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-12 col-lg-4 mt-4 mt-lg-0 d-flex pr-lg-0 flex-column">
-        <div class="flex-grow-1 side-panel-container p-4 d-flex flex-column">
-          <div class="cases-table-container">
-            <h4>Live Cases by Country</h4>
-            <div class="country-data">
-              <table class="table table-striped">
-                <tbody id="table-data">
-
-                </tbody>
-              </table>
+        <div class="col-12 col-lg-4 mt-4 mt-lg-0 d-flex pr-lg-0 flex-column">
+          <div class="flex-grow-1 side-panel-container p-4 d-flex flex-column">
+            <div class="cases-table-container">
+              <h4>Live Cases by Country</h4>
+              <div class="country-data">
+                <table class="table table-striped">
+                  <tbody id="table-data">
+  
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div class="chart-container mt-3 flex-grow-1 d-flex flex-column">
-            <h4>Worldwide New <span class="cases-type">Cases</span></h4>
-            <div class="linear-chart pt-3 flex-grow-1">
-              <canvas id="myChart"></canvas>
+            <div class="chart-container mt-3 flex-grow-1 d-flex flex-column">
+              <h4>Worldwide New <span class="cases-type">Cases</span></h4>
+              <div class="linear-chart pt-3 flex-grow-1">
+                <canvas id="myChart"></canvas>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </center>
   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
   crossorigin=""></script>
@@ -116,6 +119,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/dropdown.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/transition.min.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+       swal('a covid 19 tracker app with full stat of any country')
+    </script>
 </body>
 </html>
